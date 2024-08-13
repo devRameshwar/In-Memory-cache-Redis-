@@ -28,7 +28,7 @@ public class RedisConfiguration {
                 .setAddress("redis://" + redisHost + ":" + redisPort)
                 .setPassword(redisPassword)
                 .setConnectionPoolSize(10) // Adjust based on your needs
-                .setConnectionMinimumIdleSize(5);;
+                .setConnectionMinimumIdleSize(5).setTimeout(10000);;
 
         return Redisson.create(config);
     }
@@ -40,7 +40,7 @@ public class RedisConfiguration {
                 .setAddress("redis://" + redisHost + ":" + redisPort)
                 .setPassword(redisPassword)
                 .setConnectionPoolSize(10) // Adjust based on your needs
-                .setConnectionMinimumIdleSize(5);;
+                .setConnectionMinimumIdleSize(5).setTimeout(10000);;
 
         return Redisson.createReactive(config);
     }
