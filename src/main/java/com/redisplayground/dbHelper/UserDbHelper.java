@@ -34,4 +34,16 @@ public class UserDbHelper {
         LOGGER.info("******* Delete data by id Successfully.");
         return true;
     }
+
+    public Optional<User> findByEmail(String email) {
+        LOGGER.info("******* Find By Email called..");
+        return repository.findByEmailEqualsIgnoreCase(email);
+    }
+
+    public User updateUser(User user) {
+        LOGGER.info("******* Update User Method called ");
+        User update = repository.save(user);
+        LOGGER.info("Updated User after setting: "+update);
+        return update;
+    }
 }

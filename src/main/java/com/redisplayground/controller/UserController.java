@@ -1,5 +1,6 @@
 package com.redisplayground.controller;
 
+import com.redisplayground.payload.UpdateRequest;
 import com.redisplayground.payload.UserRequest;
 import com.redisplayground.payload.UserResponse;
 import com.redisplayground.service.UserService;
@@ -43,6 +44,12 @@ public class UserController {
     public ResponseEntity<String> deleteById(@PathVariable Integer id){
         LOGGER.info("***** delete by id Apis called..");
         return ResponseEntity.ok(service.deleteById(id));
+    }
+
+    @RequestMapping(path = "/update", method = RequestMethod.POST)
+    public ResponseEntity<UserResponse> updateUser(@RequestBody UpdateRequest request){
+        LOGGER.info("********Update Apis called");
+        return ResponseEntity.ok(service.updateUser(request));
     }
 
 }

@@ -3,6 +3,7 @@ package com.redisplayground.service.serviceImp;
 import com.redisplayground.dbHelper.UserDbHelper;
 import com.redisplayground.entity.User;
 import com.redisplayground.exception.SomethingWentWrongException;
+import com.redisplayground.payload.UpdateRequest;
 import com.redisplayground.payload.UserRequest;
 import com.redisplayground.payload.UserResponse;
 import com.redisplayground.repository.UserRepository;
@@ -12,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -62,6 +64,26 @@ public class UserServiceImp implements UserService {
         else {
             throw new SomethingWentWrongException("data not found");
         }
+    }
+
+    @Override
+    @CachePut(value="User", key="#result.id")
+    public UserResponse updateUser(UpdateRequest request) {
+        LOGGER.info("*******Update method in service class");
+        User user = dbHelper.findByEmail(request.getEmail()).orElseThrow(() -> new SomethingWentWrongException("User Not Found..."));
+        user.setEmail(request.getEmail());
+        user.setName(request.getName());
+        user.setPassword(request.getPassword());
+
+        User updated = dbHelper.updateUser(user);
+        //making response
+        UserResponse updateResponse = UserResponse.builder()
+                .name(updated.getName())
+                .email(updated.getEmail())
+                .id(updated.getId())
+                .build();
+
+        return updateResponse;
     }
 
     @Override

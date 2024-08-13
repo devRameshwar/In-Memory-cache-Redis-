@@ -1,5 +1,6 @@
 package com.redisplayground.service;
 
+import com.redisplayground.payload.UpdateRequest;
 import com.redisplayground.payload.UserRequest;
 import com.redisplayground.payload.UserResponse;
 
@@ -13,4 +14,6 @@ public interface UserService {
     List<UserResponse> getAllUsers();
 
     String deleteById(Integer id);
+
+    UserResponse updateUser(UpdateRequest request);
 }
