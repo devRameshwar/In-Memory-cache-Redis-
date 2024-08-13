@@ -32,8 +32,6 @@ Redis Database is an in-memory database that persists on disk. It means when we 
 
 # What is Redis Server?
 The full form of Redis is REmote DIctionary Server. When we use Redis in any form such as database, cache or Message Broker, we need to download a Redis Server in our system. People in the industry just call it Redis Server.
-
-# The full form of Redis is REmote DIctionary Server. When we use Redis in any form such as database, cache or Message Broker, we need to download a Redis Server in our system. People in the industry just call it Redis Server.
 Generally, there are four important annotations that we apply to implement Redis Cache feature in our application. They are as below:
 
 # @EnableCaching 
