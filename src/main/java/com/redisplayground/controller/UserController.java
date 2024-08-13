@@ -16,6 +16,7 @@ public class UserController {
     @Autowired
     private UserService service;
 
+
     private final Logger LOGGER= LoggerFactory.getLogger(UserController.class);
 
     @RequestMapping(path = "/insert", method = RequestMethod.POST)
@@ -23,7 +24,7 @@ public class UserController {
         return ResponseEntity.ok(service.saveUser(request));
     }
 
-    @RequestMapping(path = "/id",method = RequestMethod.GET)
+    @RequestMapping(path = "/{id}",method = RequestMethod.GET)
     public ResponseEntity<UserResponse> findById(@PathVariable Integer id){
         return ResponseEntity.ok(service.findByid(id));
     }
